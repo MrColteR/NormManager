@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<main xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <version>1.0</version>
+  <groups>
+    <item>
+      <name Localizable="true">test</name>
+      <id>123</id>
+      <subgroups>
+        <item>
+          <quantities>
+            <item>
+              <name Localizable="true">testNN</name>
+              <type>normalinterval</type>
+            </item>
+          </quantities>
+          <pattern>
+            <inherits>1</inherits>
+            <items>
+              <string>Types_Id</string>
+              <string>SexId</string>
+              <string>AgeId</string>
+              <string>WeightId</string>
+              <string>HeightId</string>
+            </items>
+            <ccols>1</ccols>
+          </pattern>
+        </item>
+      </subgroups>
+    </item>
+    <item>
+      <name Localizable="true">test</name>
+      <id>321</id>
+      <subgroups>
+        <item>
+          <quantities>
+            <item>
+              <name Localizable="true">test</name>
+              <type>normalinterval</type>
+            </item>
+          </quantities>
+          <pattern>
+            <inherits>1</inherits>
+            <items>
+              <string>Types_Id</string>
+              <string>SexId</string>
+              <string>AgeId</string>
+              <string>WeightId</string>
+              <string>HeightId</string>
+            </items>
+            <ccols>1</ccols>
+          </pattern>
+        </item>
+      </subgroups>
+    </item>
+  </groups>
+  <params>
+    <item>
+      <uid>Types_Id</uid>
+      <name Localizable="true">Типы</name>
+      <type>
+        <kind>enumeration</kind>
+        <unitname Localizable="false" />
+        <enum>
+          <string Localizable="true">Тип 1</string>
+          <string Localizable="true">Тип 2</string>
+          <uid>TypeOneId</uid>
+          <uid>TypeTwoId</uid>
+        </enum>
+      </type>
+    </item>
+    <item>
+      <uid>AgeId</uid>
+      <name Localizable="true">Возраст</name>
+      <fname>A</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>43800</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">дн</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>HeightId</uid>
+      <name Localizable="true">Рост</name>
+      <fname>H</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>250</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">см</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>WeightId</uid>
+      <name Localizable="true">Вес</name>
+      <fname>W</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>250</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">кг</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>SexId</uid>
+      <name Localizable="true">Пол</name>
+      <type>
+        <kind>enumeration</kind>
+        <unitname Localizable="false" />
+        <enum>
+          <string Localizable="true">М</string>
+          <string Localizable="true">Ж</string>
+          <uid>MaleId</uid>
+          <uid>FemaleId</uid>
+        </enum>
+      </type>
+    </item>
+  </params>
+</main>

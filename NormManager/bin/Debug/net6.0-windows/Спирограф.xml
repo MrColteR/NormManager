@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<main xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <version>1.0</version>
+  <groups>
+    <item>
+      <name Localizable="true">Форсированный выход</name>
+      <subgroups>
+        <item>
+          <quantities>
+            <item>
+              <name Localizable="true">ФЖЭЛ</name>
+              <type>normalinterval</type>
+              <treelevel>
+                <children>
+                  <item>
+                    <enumindex>-1</enumindex>
+                    <enumid>{8D994429-9DF2-4A72-AB46-E49FE3A7437C}</enumid>
+                    <leaf>0</leaf>
+                    <visible>1</visible>
+                    <upperincl>0</upperincl>
+                    <lowerincl>0</lowerincl>
+                    <treelevel>
+                      <children>
+                        <item>
+                          <upper>43800</upper>
+                          <leaf>0</leaf>
+                          <visible>1</visible>
+                          <upperincl>1</upperincl>
+                          <lower>0</lower>
+                          <lowerincl>1</lowerincl>
+                          <treelevel>
+                            <children>
+                              <item>
+                                <upper>250</upper>
+                                <leaf>0</leaf>
+                                <visible>1</visible>
+                                <upperincl>1</upperincl>
+                                <lower>0</lower>
+                                <lowerincl>1</lowerincl>
+                                <treelevel>
+                                  <children>
+                                    <item>
+                                      <enumindex>-1</enumindex>
+                                      <enumid>{8D994429-9DF2-4A72-AB46-E49FE3A7437C}</enumid>
+                                      <leaf>0</leaf>
+                                      <visible>1</visible>
+                                      <upperincl>0</upperincl>
+                                      <lowerincl>0</lowerincl>
+                                    </item>
+                                  </children>
+                                  <CPID>SexId</CPID>
+                                  <empty>0</empty>
+                                </treelevel>
+                              </item>
+                            </children>
+                            <CPID>HeightId</CPID>
+                            <empty>0</empty>
+                          </treelevel>
+                        </item>
+                      </children>
+                      <CPID>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</CPID>
+                      <empty>0</empty>
+                    </treelevel>
+                  </item>
+                </children>
+                <CPID>bce7177b-70df-4f41-8f24-28081537db00</CPID>
+                <empty>0</empty>
+              </treelevel>
+            </item>
+          </quantities>
+          <pattern>
+            <inherits>1</inherits>
+            <items>
+              <string>bce7177b-70df-4f41-8f24-28081537db00</string>
+              <string>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</string>
+              <string>HeightId</string>
+              <string>SexId</string>
+            </items>
+            <ccols>0</ccols>
+          </pattern>
+        </item>
+      </subgroups>
+      <id>b13eb836-560c-4fe9-a17a-14f4932b7839</id>
+    </item>
+  </groups>
+  <params>
+    <item>
+      <uid>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</uid>
+      <name Localizable="true">Возраст</name>
+      <fname>A</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>43800</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">дн</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>HeightId</uid>
+      <name Localizable="true">Рост</name>
+      <fname>H</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>250</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">см</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>WeightId</uid>
+      <name Localizable="true">Вес</name>
+      <fname>W</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>250</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">кг</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>SexId</uid>
+      <name Localizable="true">Пол</name>
+      <type>
+        <kind>enumeration</kind>
+        <unitname Localizable="false" />
+        <enum>
+          <string Localizable="true">М</string>
+          <string Localizable="true">Ж</string>
+          <uid>MaleId</uid>
+          <uid>FemaleId</uid>
+        </enum>
+      </type>
+    </item>
+    <item>
+      <uid>bce7177b-70df-4f41-8f24-28081537db00</uid>
+      <name Localizable="true">Использование бронхолитических препаратов</name>
+      <type>
+        <kind>enumeration</kind>
+        <unitname Localizable="false" />
+        <enum>
+          <string Localizable="true">Да</string>
+          <string Localizable="true">Нет</string>
+          <uid>a9c76e62-388e-41ef-8f87-0d7f35ed2d66</uid>
+          <uid>5c511378-4813-48b0-bbb9-5e2290c161b9</uid>
+        </enum>
+      </type>
+    </item>
+  </params>
+</main>

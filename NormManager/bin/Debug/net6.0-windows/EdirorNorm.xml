@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<main xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <version>1.0</version>
+  <groups>
+    <item>
+      <name Localizable="true">папка</name>
+      <subgroups>
+        <item>
+          <quantities>
+            <item>
+              <name Localizable="true">иеуы</name>
+              <type>formula</type>
+              <treelevel>
+                <children>
+                  <item>
+                  <enumid>{8D994429-9DF2-4A72-AB46-E49FE3A7437C}</enumid>
+                    <enumindex>-1</enumindex>
+                    <leaf>0</leaf>
+                    <visible>1</visible>
+                    <upperincl>0</upperincl>
+                    <lowerincl>0</lowerincl>
+                    <treelevel>
+                      <children>
+                        <item>
+                        <enumid>{8D994429-9DF2-4A72-AB46-E49FE3A7437C}</enumid>
+                          <enumindex>-1</enumindex>
+                          <leaf>0</leaf>
+                          <visible>1</visible>
+                          <upperincl>0</upperincl>
+                          <lowerincl>0</lowerincl>
+                          <treelevel>
+                            <children>
+                              <item>
+                                <upper>43800</upper>
+                                <leaf>0</leaf>
+                                <visible>1</visible>
+                                <upperincl>1</upperincl>
+                                <lower>0</lower>
+                                <lowerincl>1</lowerincl>
+                              </item>
+                            </children>
+                            <CPID>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</CPID>
+                            <empty>0</empty>
+                          </treelevel>
+                        </item>
+                      </children>
+                      <CPID>1be8da4b-dd01-4968-88c6-4139b3de95bf</CPID>
+                      <empty>0</empty>
+                    </treelevel>
+                  </item>
+                </children>
+                <CPID>SexId</CPID>
+                <empty>0</empty>
+              </treelevel>
+            </item>
+          </quantities>
+          <pattern>
+            <inherits>1</inherits>
+            <items>
+              <string>SexId</string>
+              <string>1be8da4b-dd01-4968-88c6-4139b3de95bf</string>
+              <string>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</string>
+            </items>
+            <ccols>0</ccols>
+          </pattern>
+        </item>
+      </subgroups>
+      <id>6254ea59-70a2-46a9-9e79-4515252c82f6</id>
+    </item>
+  </groups>
+  <params>
+    <item>
+      <uid>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</uid>
+      <name Localizable="true">Возраст</name>
+      <fname>A</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>43800</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">дн</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>HeightId</uid>
+      <name Localizable="true">Рост</name>
+      <fname>H</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>250</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">см</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>WeightId</uid>
+      <name Localizable="true">Вес</name>
+      <fname>W</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>250</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">кг</unitname>
+        <enum />
+      </type>
+    </item>
+    <item>
+      <uid>SexId</uid>
+      <name Localizable="true">Пол</name>
+      <type>
+        <kind>enumeration</kind>
+        <unitname Localizable="false" />
+        <enum>
+          <string Localizable="true">М</string>
+          <string Localizable="true">Ж</string>
+          <uid>MaleId</uid>
+          <uid>FemaleId</uid>
+        </enum>
+      </type>
+    </item>
+    <item>
+      <uid>1be8da4b-dd01-4968-88c6-4139b3de95bf</uid>
+      <name Localizable="true">тест</name>
+      <type>
+        <kind>enumeration</kind>
+        <unitname Localizable="false" />
+        <enum>
+          <string Localizable="true">1</string>
+          <string Localizable="true">2</string>
+          <uid>530edff2-500b-4f1e-9e16-c5c3e24a0468</uid>
+          <uid>1b7c9980-e426-4ab3-89c1-48913ffde773</uid>
+        </enum>
+      </type>
+    </item>
+  </params>
+</main>

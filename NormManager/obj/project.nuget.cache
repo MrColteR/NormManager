@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "yxCy47nC+/qSL1XYMtqRWe3vz6UrF5uEOwuKSva9lDU4zFr9mOazAQofFKaLOglgwn6PLu8sdOYl8J95ZBN6HA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\MrCol\\OneDrive\\Рабочий стол\\graduate work\\NormManager\\NormManager\\NormManager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MrCol\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\MrCol\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

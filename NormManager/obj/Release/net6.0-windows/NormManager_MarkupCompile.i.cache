@@ -1,0 +1,20 @@
+﻿NormManager
+1.0.0.0
+
+winexe
+C#
+.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\
+NormManager
+none
+false
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\App.xaml
+5-520902760
+
+421364704741
+196-1587163212
+Views\CreateNewFolderWindow.xaml;Views\CreateNewItemWindow.xaml;Views\CreateNewXmlWindow.xaml;Views\EditorTreeWindow.xaml;Views\MainWindow.xaml;
+
+False
+

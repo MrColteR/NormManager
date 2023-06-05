@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<main>
+  <version>1.0</version>
+  <name Localizable="true">Стандартная</name>
+  <groups>
+    <item>
+      <subgroups>
+        <item>
+          <subgroups />
+          <quantities>
+            <item>
+              <treelevel>
+                <empty>0</empty>
+              </treelevel>
+              <type>normalinterval</type>
+              <name Localizable="true">Айтем</name>
+            </item>
+          </quantities>
+          <pattern>
+            <inherits>1</inherits>
+            <items>
+              <string>{102B2E65-D2A7-438A-87C3-EBAEA31B7FE6}</string>
+              <string>{892B2E65-D2A7-438A-87C3-EBAEA31B7FE6}</string>
+            </items>
+            <ccols>1</ccols>
+          </pattern>
+          <name Localizable="true">FolderDist</name>
+        </item>
+      </subgroups>
+      <quantities />
+      <pattern>
+        <inherits>1</inherits>
+        <ccols>0</ccols>
+      </pattern>
+      <name Localizable="true">Папка</name>
+    </item>
+    <item>
+      <subgroups>
+        <item>
+          <subgroups />
+          <quantities>
+            <item>
+              <treelevel>
+                <empty>0</empty>
+              </treelevel>
+              <type>normalinterval</type>
+              <name Localizable="true">Айтем</name>
+            </item>
+          </quantities>
+          <pattern>
+            <inherits>1</inherits>
+            <items>
+              <string>{102B2E65-D2A7-438A-87C3-EBAEA31B7FE6}</string>
+            </items>
+            <ccols>1</ccols>
+          </pattern>
+          <name Localizable="true">FolderDist</name>
+        </item>
+      </subgroups>
+      <quantities />
+      <pattern>
+        <inherits>1</inherits>
+        <ccols>1</ccols>
+      </pattern>
+      <name Localizable="true">Папка</name>
+    </item>
+  </groups>
+  <params>
+    <item>
+      <uid>{102B2E65-D2A7-438A-87C3-EBAEA31B7FE6}</uid>
+      <name Localizable="true">Пример</name>
+      <type>
+        <kind>enumeration</kind>
+        <enum>
+          <string Localizable="true">Test1</string>
+          <string Localizable="true">Test2</string>
+          <uid>{F2EA13BF-840D-497F-A6AD-C13A10B6FDAF}</uid>
+          <uid>{5260A89B-2CDA-4075-8259-B117B01A457A}</uid>
+        </enum>
+      </type>
+    </item>
+    <item>
+      <uid>{892B2E65-D2A7-438A-87C3-EBAEA31B7FE6}</uid>
+      <name Localizable="true">Возвраст</name>
+      <fname>A</fname>
+      <lowerbound>0</lowerbound>
+      <upperbound>43800</upperbound>
+      <type>
+        <kind>real</kind>
+        <unitname Localizable="true">дн</unitname>
+      </type>
+    </item>
+  </params>
+</main>
