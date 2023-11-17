@@ -1,0 +1,6 @@
+.git/
+.vs/
+.idea/
+
+NormManager/bin/
+NormManager/obj/
