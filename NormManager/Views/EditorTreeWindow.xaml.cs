@@ -18,6 +18,7 @@ namespace NormManager.Views
     public partial class EditorTreeWindow : Window
     {
         private const string SOLUTION_CONTEXT = "SolutionContext";
+        private bool _dataGridIsVisible = false;
         public EditorTreeWindow()
         {
             InitializeComponent();
@@ -25,9 +26,7 @@ namespace NormManager.Views
         }
 
         private void WindowClosed(object? sender, EventArgs e)
-        {
-            (DataContext as EditorTreeViewModel)?.Close.Execute(null);
-        }
+            => (DataContext as EditorTreeViewModel)?.Close.Execute(null);
 
         private void SolutionTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -55,12 +54,10 @@ namespace NormManager.Views
             }
         }
 
-        private void SolutionTree_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void SolutionTree_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             var dataContext = (EditorTreeViewModel)DataContext;
             var oldSelectedSubmainItem = dataContext.SelectedSubmainItem is null ? new SubmainTreeElement() { MeasurableQuantityName = string.Empty } : dataContext.SelectedSubmainItem;
-            dataContext.SelectedMainItem = null;
-            dataContext.SelectedSubmainItem = null;
 
             TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
             if (treeViewItem != null)
@@ -83,6 +80,13 @@ namespace NormManager.Views
                     dataContext.SelectedMainItem = main;                    
                 }
             }
+            else
+            {
+                DataGridClear();
+                GenerateDataGrid(); 
+                dataContext.SelectedMainItem = null;
+                dataContext.SelectedSubmainItem = null;
+            }
 
             SolutionTree.ContextMenu = SolutionTree.Resources[SOLUTION_CONTEXT] as ContextMenu;
         }
@@ -99,62 +103,67 @@ namespace NormManager.Views
 
         private void GenerateDataGrid()
         {
+            _dataGridIsVisible = true;
             var dataContext = ((EditorTreeViewModel)DataContext);
-            var countItems = dataContext.SelectedSubmainItem.ParametersIncludeInValue.Count;
-            int countColumns = 0; 
-            for (int i = 0; i < countItems; i++)
+            if (dataContext.SelectedSubmainItem != null)
             {
-                DataGrid.Columns.Add(new DataGridTextColumn()
+                var countItems = dataContext.SelectedSubmainItem.ParametersIncludeInValue.Count;
+                for (int i = 0; i < countItems; i++)
                 {
-                    Header = $"{dataContext.SelectedSubmainItem.ParametersIncludeInValue[i].Name.Text}",
-                    Binding = new Binding("[" + i + "]")
-                }); 
+                    DataGrid.Columns.Add(new DataGridTextColumn()
+                    {
+                        Header = $"{dataContext.SelectedSubmainItem.ParametersIncludeInValue[i].Name.Text}",
+                        Binding = new Binding("[" + i + "]")
+                    });
+                }
+
+                switch (dataContext.SelectedSubmainItem.ValueType)
+                {
+                    case MeasuredQuantityType.Formula:
+                        DataGridAddColumn(DataGrid, "Формула", countItems);
+                        break;
+
+                    case MeasuredQuantityType.Fixedgradations:
+                        DataGridAddColumn(DataGrid, "Фиксированные градации", countItems);
+                        break;
+
+                    //case TypeMeasuredQuantity.Variablegradations:
+                    //    break;
+
+                    case MeasuredQuantityType.Normalinterval:
+                        DataGridAddColumn(DataGrid, "Нижняя граница", countItems);
+                        DataGridAddColumn(DataGrid, "Норма", countItems + 1);
+                        DataGridAddColumn(DataGrid, "Вверхняя граница", countItems + 2);
+                        DataGridAddColumn(DataGrid, "Ср. отклонение", countItems + 3);
+                        break;
+
+                    //case TypeMeasuredQuantity.Fixedgradationsnorm:
+                    //    break;
+
+                    case MeasuredQuantityType.String:
+                        DataGridAddColumn(DataGrid, "Строка", countItems);
+                        break;
+                }
+
+                var rows = new List<object>();
+                var childrens = dataContext.GetAllChildren();
+                var countParams = dataContext.SelectedSubmainItem.ParametersIncludeInValue.Count;
+                for (int i = 0; i < childrens.Count; i += countParams)
+                {
+                    var rowValues = new List<object>();
+                    for (int j = 0; j < countParams && i + j < childrens.Count; j++)
+                    {
+                        var lowerbound = childrens[i + j].Lower;
+                        var upperbound = childrens[i + j].Upper;
+                        string value = (lowerbound == null || upperbound == null) ? "Любой" : $"{lowerbound} ... {upperbound}";
+                        rowValues.Add(value);
+                    }
+
+                    rows.Add(rowValues);
+                }
+
+                DataGrid.ItemsSource = rows;
             }
-
-            switch (dataContext.SelectedSubmainItem.ValueType)
-            {
-                case MeasuredQuantityType.Formula:
-                    DataGridAddColumn(DataGrid, "Формула", countItems);
-                    countColumns = countItems + 1;
-                    break;
-
-                case MeasuredQuantityType.Fixedgradations:
-                    DataGridAddColumn(DataGrid, "Фиксированные градации", countItems);
-                    countColumns = countItems + 1;
-                    break;
-
-                //case TypeMeasuredQuantity.Variablegradations:
-                //    break;
-
-                case MeasuredQuantityType.Normalinterval:
-                    DataGridAddColumn(DataGrid, "Нижняя граница", countItems);
-                    DataGridAddColumn(DataGrid, "Норма", countItems + 1);
-                    DataGridAddColumn(DataGrid, "Вверхняя граница", countItems + 2);
-                    DataGridAddColumn(DataGrid, "Ср. отклонение", countItems + 3);
-                    countColumns = countItems + 4;
-                    break;
-
-                //case TypeMeasuredQuantity.Fixedgradationsnorm:
-                //    break;
-
-                case MeasuredQuantityType.String:
-                    DataGridAddColumn(DataGrid, "Строка", countItems);
-                    countColumns = countItems + 1;
-                    break;
-            }
-
-            List<object> rows = new();
-            string[] value = new string[countColumns];
-
-            for (int i = 0; i < countItems; i++)
-            {
-                var lowerbound = dataContext.SelectedSubmainItem.ParametersIncludeInValue[i].Lowerbound;
-                var upperbound = dataContext.SelectedSubmainItem.ParametersIncludeInValue[i].Upperbound;
-                value[i] = (lowerbound == null || upperbound == null) ? "Любой" : $"{lowerbound} ... {upperbound}";
-            }
-
-            rows.Add(value);
-            DataGrid.ItemsSource = rows;
         }
 
         private void DataGridAddColumn(DataGrid datagrid, string header, int bindingIndex) => datagrid.Columns.Add(new DataGridTextColumn()
@@ -165,9 +174,37 @@ namespace NormManager.Views
 
         private void DataGridClear() => DataGrid.Columns.Clear();
 
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // your code to handle the right-click event goes here
+            DataGrid dataGrid = (DataGrid)sender;
+            DataGridCell cell = GetCell(dataGrid, e);
+            if (cell != null)
+            {
+                object cellValue = cell.Content;
+                int rowIndex = dataGrid.Items.IndexOf(cell.DataContext);
+                int columnIndex = dataGrid.Columns.IndexOf(cell.Column);
+            }
+        }
+
+        private DataGridCell GetCell(DataGrid dataGrid, MouseButtonEventArgs e)
+        {
+            Visual hitTestResult = (Visual)VisualTreeHelper.HitTest(dataGrid, e.GetPosition(dataGrid)).VisualHit;
+
+            while (hitTestResult != null && hitTestResult != dataGrid)
+            {
+                if (hitTestResult is DataGridCell)
+                {
+                    return (DataGridCell)hitTestResult;
+                }
+                hitTestResult = (Visual)VisualTreeHelper.GetParent(hitTestResult);
+            }
+
+            return null;
         }
     }
 }

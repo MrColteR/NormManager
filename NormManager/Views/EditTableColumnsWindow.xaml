@@ -27,7 +27,7 @@
             Grid.Column="0"
             Margin="10,10,0,0"
             ItemsSource="{Binding UsedParametersNames}"
-            SelectedItem="{Binding SelectedUsedParameters}" />
+            SelectedItem="{Binding SelectedUsedParameter}" />
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
@@ -62,7 +62,7 @@
             Grid.Column="2"
             Margin="0,10,10,0"
             ItemsSource="{Binding AllParametersNames}"
-            SelectedItem="{Binding SelectedAllParameters}" />
+            SelectedItem="{Binding SelectedAllParameter}" />
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"

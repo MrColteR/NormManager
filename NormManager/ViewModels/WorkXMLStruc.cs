@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace NormManager.ViewModels
 {
+    /// <summary>
+    /// Пример рабочей XML структуры 
+    /// </summary>
     internal class WorkXMLStruc
     {
         public WorkXMLStruc() 

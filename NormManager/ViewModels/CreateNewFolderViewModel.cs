@@ -24,11 +24,7 @@ namespace NormManager.ViewModels
         public string FolderName
         {
             get => _folderName;
-            set
-            {
-                _folderName = value;
-                OnPropertyChanged(nameof(_folderName));
-            }
+            set => SetProperty(ref _folderName, value);
         }
 
         /// <summary>

@@ -18,12 +18,22 @@ namespace NormManager.Services.Interfaces
         /// <summary>
         /// Выбранная величина
         /// </summary>
-        public string SelectedMeasurableQuantity { get; set; }
+        public string SelectedNameMeasurableQuantity { get; set; }
+
+        /// <summary>
+        /// Выбранный  элемент
+        /// </summary>
+        public string SelectedIdMeasurableQuantity { get; set; }
+
+        /// <summary>
+        /// Выбранный параметр
+        /// </summary>
+        public string SelectedParamName { get; set; }
 
         /// <summary>
         /// Тип величины
         /// </summary>
-        public MeasuredQuantityType SelectedMeasuredQuantityType { get; set; }
+        public MeasuredQuantityType SelectedTypeMeasuredQuantity { get; set; }
 
         /// <summary>
         /// Создание структуры по существующему XML документу
@@ -46,6 +56,7 @@ namespace NormManager.Services.Interfaces
         /// <summary>
         /// Добавление величины
         /// </summary>
+        /// <param name="id">ID величины</param>
         /// <param name="countInputUsedParameters">Кол-во параметров для выпадающего списка</param>
         /// <param name="usedParameters">Список использоваемых параметров</param>
         public void AddMeasurableQuantity(int countInputUsedParameters, ObservableCollection<ItemOfParams> usedParameters);

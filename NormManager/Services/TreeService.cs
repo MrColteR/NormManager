@@ -21,17 +21,26 @@ namespace NormManager.Services
         /// <summary>
         /// Выбранный элемент
         /// </summary>
-        public string SelectedMeasurableQuantity { get; set; }
+        public string SelectedNameMeasurableQuantity { get; set; }
+
+        /// <summary>
+        /// Выбранный  элемент
+        /// </summary>
+        public string SelectedIdMeasurableQuantity { get; set; }
+
+        /// <summary>
+        /// Выбранный параметр
+        /// </summary>
+        public string SelectedParamName { get; set; }
 
         /// <summary>
         /// Тип величны
         /// </summary>
-        public MeasuredQuantityType SelectedMeasuredQuantityType { get; set; }
+        public MeasuredQuantityType SelectedTypeMeasuredQuantity { get; set; }
 
         /// <summary>
         /// Создание структуры по существующему XML документу
         /// </summary>
-        /// <param name="structure">Структура XML</param>
         public void CreateStructureFromXML(Main structure)
         {
             for (int i = 0; i < structure.Groups.ItemOfGroup.Count; i++)
@@ -53,6 +62,7 @@ namespace NormManager.Services
                     MainTreeElementsList[i].SubmainElementsList.Add(new SubmainTreeElement()
                     {
                         FolderName = MainTreeElementsList[i].FolderName,
+                        ID = structure.Groups.ItemOfGroup[i].Subgroups.ItemOfSubgroup[j].Quantities.ItemOfType.ID,
                         MeasurableQuantityName = structure.Groups.ItemOfGroup[i].Subgroups.ItemOfSubgroup[j].Quantities.ItemOfType.Name.Text,
                         CountInputParameters = structure.Groups.ItemOfGroup[i].Subgroups.ItemOfSubgroup[j].Pattern.Ccols,
                         ParametersIncludeInValue = param,
@@ -65,7 +75,6 @@ namespace NormManager.Services
         /// <summary>
         /// Добавление папки
         /// </summary>
-        /// <param name="folderName">Название папки</param>
         public void AddNewFolder(string folderName)
         {
             MainTreeElementsList.Add(new MainTreeElement()
@@ -77,7 +86,6 @@ namespace NormManager.Services
         /// <summary>
         /// Удаление папки
         /// </summary>
-        /// <param name="folderName">Название папки</param>
         public void RemoveFolder(string folderName)
         {
             var folderTree = MainTreeElementsList.First(x => x.FolderName == folderName);
@@ -87,18 +95,17 @@ namespace NormManager.Services
         /// <summary>
         /// Добавление величины
         /// </summary>
-        /// <param name="countInputUsedParameters">Кол-во параметров для выпадающего списка</param>
-        /// <param name="usedParameters">Список использоваемых параметров</param>
         public void AddMeasurableQuantity(int countInputUsedParameters, ObservableCollection<ItemOfParams> usedParameters)
         {
             var measurableQuantity = MainTreeElementsList.First(x => x.FolderName == SelectedFolder).SubmainElementsList;
             var submainTreeElement = new SubmainTreeElement()
             {
+                ID = SelectedIdMeasurableQuantity,
                 CountInputParameters = countInputUsedParameters,
                 FolderName = SelectedFolder,
-                MeasurableQuantityName = SelectedMeasurableQuantity,
+                MeasurableQuantityName = SelectedNameMeasurableQuantity,
                 ParametersIncludeInValue = usedParameters,
-                ValueType = SelectedMeasuredQuantityType
+                ValueType = SelectedTypeMeasuredQuantity
             };
 
             measurableQuantity.Add(submainTreeElement);
@@ -110,15 +117,16 @@ namespace NormManager.Services
         public void EditMeasurableQuantity()
         {
             var measurableQuantityList = MainTreeElementsList.First(x => x.FolderName == SelectedFolder).SubmainElementsList;
-            var measurableQuantity = measurableQuantityList.First(x => x.MeasurableQuantityName == SelectedMeasurableQuantity);
+            var measurableQuantity = measurableQuantityList.First(x => x.MeasurableQuantityName == SelectedNameMeasurableQuantity);
             var index = measurableQuantityList.IndexOf(measurableQuantity);
             var submainTreeElement = new SubmainTreeElement()
             {
+                ID = SelectedIdMeasurableQuantity,
                 CountInputParameters = measurableQuantity.CountInputParameters,
                 FolderName = SelectedFolder,
-                MeasurableQuantityName = SelectedMeasurableQuantity,
+                MeasurableQuantityName = SelectedNameMeasurableQuantity,
                 ParametersIncludeInValue = measurableQuantity.ParametersIncludeInValue,
-                ValueType = SelectedMeasuredQuantityType
+                ValueType = SelectedTypeMeasuredQuantity
             };
             
             measurableQuantityList[index] = submainTreeElement;
@@ -127,21 +135,20 @@ namespace NormManager.Services
         /// <summary>
         /// Редактирование величины
         /// </summary>
-        /// <param name="countInputUsedParameters">Кол-во параметров для выпадающего списка</param>
-        /// <param name="usedParameters">Список использоваемых параметров</param>
         public void EditMeasurableQuantity(int countInputUsedParameters, ObservableCollection<ItemOfParams> usedParameters)
         {
             var measurableQuantity = MainTreeElementsList.First(x => x.FolderName == SelectedFolder).SubmainElementsList;
             var submainTreeElement = new SubmainTreeElement()
             {
+                ID = SelectedIdMeasurableQuantity,
                 CountInputParameters = countInputUsedParameters,
                 FolderName = SelectedFolder,
-                MeasurableQuantityName = SelectedMeasurableQuantity,
+                MeasurableQuantityName = SelectedNameMeasurableQuantity,
                 ParametersIncludeInValue = usedParameters,
-                ValueType = SelectedMeasuredQuantityType
+                ValueType = SelectedTypeMeasuredQuantity
             };
 
-            var item = measurableQuantity.First(x => x.MeasurableQuantityName == SelectedMeasurableQuantity);
+            var item = measurableQuantity.First(x => x.MeasurableQuantityName == SelectedNameMeasurableQuantity);
             var index = measurableQuantity.IndexOf(item);
             measurableQuantity[index] = submainTreeElement;
         }
@@ -149,8 +156,6 @@ namespace NormManager.Services
         /// <summary>
         /// Удаление величины
         /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название величины</param>
         public void RemoveMeasurableQuantity(string folderName, string measurableQuantityName)
         {
             var folderTree = MainTreeElementsList.First(x => x.FolderName == folderName);
@@ -161,9 +166,6 @@ namespace NormManager.Services
         /// <summary>
         /// Изменить название величины
         /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название величины</param>
-        /// <param name="newMeasurableQuantityName">Новое название величины</param>
         public void RenameMeasureValue(string folderName, string measurableQuantityName, string newMeasurableQuantityName)
         {
             var mainItem = MainTreeElementsList.First(x => x.FolderName == folderName);
@@ -182,7 +184,8 @@ namespace NormManager.Services
         public void ClearTreeProps()
         {
             SelectedFolder = string.Empty;
-            SelectedMeasurableQuantity= string.Empty;
+            SelectedNameMeasurableQuantity= string.Empty;
+            SelectedIdMeasurableQuantity = string.Empty;
         }
     }
 }

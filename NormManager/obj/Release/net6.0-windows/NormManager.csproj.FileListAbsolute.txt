@@ -7,7 +7,6 @@ C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormMa
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\bin\Release\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\NormManager.csproj.AssemblyReference.cache
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateNewFolderWindow.g.cs
-C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateNewItemWindow.g.cs
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateNewXmlWindow.g.cs
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\EditorTreeWindow.g.cs
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\MainWindow.g.cs
@@ -17,7 +16,6 @@ C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormMa
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\NormManager_MarkupCompile.lref
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\App.baml
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateNewFolderWindow.baml
-C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateNewItemWindow.baml
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateNewXmlWindow.baml
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\EditorTreeWindow.baml
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\MainWindow.baml
@@ -32,3 +30,13 @@ C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormMa
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\NormManager.pdb
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\NormManager.genruntimeconfig.cache
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\ref\NormManager.dll
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\EditTableColumnsWindow.baml
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\TableColumnsWindow.baml
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\AddParamsWindow.g.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateMeasureValueWindow.g.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\EditMeasureValueWindow.g.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\EditTableColumnsWindow.g.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\TableColumnsWindow.g.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\AddParamsWindow.baml
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\CreateMeasureValueWindow.baml
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\obj\Release\net6.0-windows\Views\EditMeasureValueWindow.baml

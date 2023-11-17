@@ -6,6 +6,8 @@ using NormManager.Models;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace NormManager.ViewModels
 {
@@ -27,6 +29,7 @@ namespace NormManager.ViewModels
         private ICommand _moveDownMeasurableQuantity;
         private ICommand _serialize;
         private ICommand _addParams;
+        private ICommand _splitLine;
 
         private bool _isMeasurableQuantity;
         private MainTreeElement _selectedMainItem = new();
@@ -54,10 +57,7 @@ namespace NormManager.ViewModels
         public MainTreeElement SelectedMainItem 
         {
             get => _selectedMainItem;
-            set
-            {
-                _selectedMainItem = value;
-            }
+            set => _selectedMainItem = value;
         } 
 
         /// <summary>
@@ -66,11 +66,7 @@ namespace NormManager.ViewModels
         public SubmainTreeElement SelectedSubmainItem 
         {
             get => _selectedSubmainItem;
-            set
-            {
-                _selectedSubmainItem = value;
-                UpdatePropertiesSelectedItem();
-            }
+            set => SetProperty(ref _selectedSubmainItem, value);
         }
 
         /// <summary>
@@ -78,23 +74,9 @@ namespace NormManager.ViewModels
         /// </summary>
         public bool IsMeasurableQuantity 
         {
-            get => _isMeasurableQuantity; 
-            set
-            {
-                _isMeasurableQuantity = value;
-                OnPropertyChanged(nameof(IsMeasurableQuantity));
-            }
+            get => _isMeasurableQuantity;
+            set => SetProperty(ref _isMeasurableQuantity, value);
         }
-
-        /// <summary>
-        /// Команда закрытия окна
-        /// </summary>
-        public ICommand Close => _close ??= new RelayCommand(obj =>
-        {
-            _structureService.ClearStructure();
-            _treeService.ClearTree();
-            _windowService.Close<EditorTreeViewModel>();
-        });
 
         /// <summary>
         /// Команда добавление папки
@@ -124,7 +106,8 @@ namespace NormManager.ViewModels
         public ICommand EditMeasurableQuantity => _editMeasurableQuantity ??= new RelayCommand(obj =>
         {
             _treeService.SelectedFolder = SelectedMainItem.FolderName;
-            _treeService.SelectedMeasurableQuantity = SelectedSubmainItem.MeasurableQuantityName;
+            _treeService.SelectedNameMeasurableQuantity = SelectedSubmainItem.MeasurableQuantityName;
+            _treeService.SelectedIdMeasurableQuantity = SelectedSubmainItem.ID;
             _windowService.Show<EditMeasureValueViewModel>();
         }, (obj) => SelectedSubmainItem != null);
 
@@ -194,6 +177,50 @@ namespace NormManager.ViewModels
         {
             _windowService.Show<AddParamsViewModel>();
         });
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand SplitLine => _splitLine ??= new RelayCommand(obj =>
+        {
+            var treeLevel = _structureService.Structure.Groups.ItemOfGroup
+                .First(x => x.Name.Text == SelectedSubmainItem.FolderName).Subgroups.ItemOfSubgroup
+                .First(x => x.Quantities.ItemOfType.Name.Text == SelectedSubmainItem.MeasurableQuantityName)
+                .Quantities.ItemOfType.TreeLevel;
+
+            // Разделение для первого элемента без учета индекса строки
+            var children = treeLevel.Children.ItemOfChildren;
+            var newLower = Convert.ToInt32(children[0].Upper) / 2;
+            var newUpper = children[0].Upper;
+            children[0].Upper = newLower.ToString();
+            var copiedItem = new ItemOfChildren
+            {
+                Upper = newUpper.ToString(),
+                Lower = (newLower + 1).ToString(), 
+            };
+
+            treeLevel.Children.ItemOfChildren.Add(copiedItem);
+        });
+
+        /// <summary>
+        /// Команда закрытия окна
+        /// </summary>
+        public ICommand Close => _close ??= new RelayCommand(obj =>
+        {
+            _structureService.ClearStructure();
+            _treeService.ClearTree();
+            _windowService.Close<EditorTreeViewModel>();
+        });
+        
+        public List<ItemOfChildren> GetAllChildren()
+        {
+            var treeLevel = _structureService.Structure.Groups.ItemOfGroup
+                .First(x => x.Name.Text == SelectedSubmainItem.FolderName).Subgroups.ItemOfSubgroup
+                .First(x => x.Quantities.ItemOfType.Name.Text == SelectedSubmainItem.MeasurableQuantityName)
+                .Quantities.ItemOfType.TreeLevel;
+
+            return _structureService.GetAllChildren(treeLevel);
+        }
 
         private void UpdatePropertiesSelectedItem() => IsMeasurableQuantity = SelectedSubmainItem is not null ? true : false;
     }

@@ -62,13 +62,22 @@
                 <DataGrid
                     x:Name="DataGrid"
                     AutoGenerateColumns="False"
-                    MouseRightButtonDown="SolutionTree_MouseRightButtonDown"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+                    MouseRightButtonDown="DataGrid_MouseRightButtonDown"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    SelectionChanged="DataGrid_SelectionChanged" />
             </Grid>
             <StackPanel
                 Grid.Row="1"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
+                <Button
+                    Width="130"
+                    Height="24"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Command="{Binding SplitLine}"
+                    Content="разделить" />
                 <Button
                     Width="130"
                     Height="24"

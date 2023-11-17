@@ -8,8 +8,8 @@ namespace NormManager.Converters
     {
         public static string GetEnumDescription(Enum value)
         {
-            FieldInfo field = value.GetType().GetField(value.ToString());
-            DescriptionAttribute attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+            FieldInfo field = value.GetType().GetField(value.ToString())!;
+            DescriptionAttribute attribute = (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute)!;
             return attribute == null ? value.ToString() : attribute.Description;
         }
 
@@ -25,14 +25,14 @@ namespace NormManager.Converters
                 {
                     if (attribute.Description == description)
                     {
-                        return (T)field.GetValue(null);
+                        return (T)field.GetValue(null)!;
                     }
                 }
                 else
                 {
                     if (field.Name == description)
                     {
-                        return (T)field.GetValue(null);
+                        return (T)field.GetValue(null)!;
                     }
                 }
             }

@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\NormManager\App.xaml
-5-520902760
+91691771939
 
-421364704741
+581969348654
 196-1587163212
-Views\CreateNewFolderWindow.xaml;Views\CreateNewItemWindow.xaml;Views\CreateNewXmlWindow.xaml;Views\EditorTreeWindow.xaml;Views\MainWindow.xaml;
+Views\AddParamsWindow.xaml;Views\CreateMeasureValueWindow.xaml;Views\CreateNewFolderWindow.xaml;Views\CreateNewXmlWindow.xaml;Views\EditMeasureValueWindow.xaml;Views\EditorTreeWindow.xaml;Views\EditTableColumnsWindow.xaml;Views\MainWindow.xaml;Views\TableColumnsWindow.xaml;
 
-False
+True
 

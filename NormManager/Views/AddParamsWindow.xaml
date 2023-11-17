@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Добавление параметров"
     Width="400"
-    Height="590"
+    Height="640"
     DataContext="{Binding AddParamsViewModel, Source={StaticResource ViewModelLocator}}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -17,6 +17,8 @@
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="170" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="20" />
             <RowDefinition Height="30" />
             <RowDefinition Height="290" />
@@ -34,7 +36,8 @@
                 Margin="0,3,13,13"
                 HorizontalAlignment="Right"
                 Command="{Binding RemoveParam}"
-                Content="Удалить параметр" />
+                Content="Удалить параметр"
+                Visibility="{Binding IsEdit, Converter={StaticResource VisibilityConverter}}" />
         </StackPanel>
         <TextBlock
             Grid.Row="1"
@@ -45,14 +48,29 @@
             TextAlignment="Center" />
         <TextBox
             Grid.Row="2"
-            Width="200"
+            Width="250"
             Height="24"
             Margin="13,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Text="{Binding ParamsName, UpdateSourceTrigger=PropertyChanged}" />
-        <GroupBox
+        <TextBlock
             Grid.Row="3"
+            Margin="13,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="ID параметра"
+            TextAlignment="Center" />
+        <TextBox
+            Grid.Row="4"
+            Width="250"
+            Height="24"
+            Margin="13,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="{Binding ParamID, UpdateSourceTrigger=PropertyChanged}" />
+        <GroupBox
+            Grid.Row="5"
             Margin="3.0"
             Padding="5"
             Header="Выберите тип параметра">
@@ -78,6 +96,12 @@
                         Margin="3"
                         HorizontalAlignment="Left"
                         Text="{Binding Upperbound, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Margin="3" Text="Обозначение в фолмулах" />
+                    <TextBox
+                        Width="60"
+                        Margin="3"
+                        HorizontalAlignment="Left"
+                        Text="{Binding Fname, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Visibility="{Binding IsEnum, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Margin="3" Text="Список вариантов" />
@@ -117,7 +141,7 @@
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="6" Visibility="{Binding IsAddition, Converter={StaticResource VisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -129,7 +153,7 @@
                 Margin="16,0,0,0"
                 HorizontalAlignment="Left"
                 Command="{Binding AddNewParam}"
-                Content="Закончить редактирование" />
+                Content="Добавить" />
             <Button
                 Grid.Column="1"
                 Width="120"
@@ -138,6 +162,28 @@
                 HorizontalAlignment="Right"
                 Command="{Binding Close}"
                 Content="Закрыть" />
+        </Grid>
+        <Grid Grid.Row="6" Visibility="{Binding IsEdit, Converter={StaticResource VisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Width="170"
+                Height="24"
+                Margin="16,0,0,0"
+                HorizontalAlignment="Left"
+                Command="{Binding EditingParam}"
+                Content="Редактировать" />
+            <Button
+                Grid.Column="1"
+                Width="120"
+                Height="24"
+                Margin="0,0,16,0"
+                HorizontalAlignment="Right"
+                Command="{Binding CancelAdding}"
+                Content="Отменить" />
         </Grid>
     </Grid>
 </Window>

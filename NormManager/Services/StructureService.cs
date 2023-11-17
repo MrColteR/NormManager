@@ -18,36 +18,19 @@ namespace NormManager.Services
             _treeService = treeService;
         }
 
-        /// <summary>
-        /// Структура XAML
-        /// </summary>
         public Main Structure 
         {
             get => _structure;
             set => _structure = value;
         }
 
-        /// <summary>
-        /// Название файла
-        /// </summary>
         public string FileName
         {
             get => _fileName;
         }
 
-        /// <summary>
-        /// Установить название файла
-        /// </summary>
-        /// <param name="fileName">название файла</param>
-        public void SetFileName(string fileName)
-        {
-            _fileName = fileName;
-        }
+        public void SetFileName(string fileName) => _fileName = fileName;
 
-        /// <summary>
-        /// Добавление папки
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
         public void AddNewFolder(string folderName)
         {
             _structure.Groups.ItemOfGroup.Add(new ItemOfGroup()
@@ -63,10 +46,6 @@ namespace NormManager.Services
             _treeService.AddNewFolder(folderName);
         }
 
-        /// <summary>
-        /// Удаление папки
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
         public void RemoveFolder(string folderName)
         {
             var folderStructure = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName);
@@ -75,11 +54,6 @@ namespace NormManager.Services
             _treeService.RemoveFolder(folderName);
         }
 
-        /// <summary>
-        /// Удаление величины
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название величины</param>
         public void RemoveMeasurableQuantity(string folderName, string measurableQuantityName)
         {
             var folderStructure = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName);
@@ -89,10 +63,6 @@ namespace NormManager.Services
             _treeService.RemoveMeasurableQuantity(folderName, measurableQuantityName);
         }
 
-        /// <summary>
-        /// Перемещение папки вверх
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
         public void MoveUpFolder(string folderName)
         {
             var itemStructure = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName);
@@ -104,10 +74,6 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Перемещение папки вниз
-        /// </summary>
-        /// <param name="folderName">Название папка</param>
         public void MoveDownFolder(string folderName)
         {
             var itemStructure = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName);
@@ -119,11 +85,6 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Перемещение измеряемой величины вверх
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название измеряемой величины</param>
         public void MoveUpMeasurableQuantity(string folderName, string measurableQuantityName)
         {
             var itemList = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName).Subgroups.ItemOfSubgroup;
@@ -136,11 +97,6 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Перемещение измеряемой величины вниз
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название измеряемой величины</param>
         public void MoveDownMeasurableQuantity(string folderName, string measurableQuantityName)
         {
             var itemList = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName).Subgroups.ItemOfSubgroup;
@@ -153,19 +109,12 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Добавление структуры из файла
-        /// </summary>
-        /// <param name="mainStructure"></param>
         public void SetReadyStructure(Main mainStructure)
         {
             _structure = mainStructure;
            _treeService.CreateStructureFromXML(_structure);
         }
 
-        /// <summary>
-        /// Добавление дефолтных параметров
-        /// </summary>
         public void AddDefaultParams()
         {
             _structure.Params.ItemOfParams.Add(new ItemOfParams()
@@ -267,19 +216,12 @@ namespace NormManager.Services
             });
         }
 
-        /// <summary>
-        /// Добавление измеряемой величины
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название величины</param>
-        /// <param name="measurableQuantityType">Тип величины</param>
-        /// <param name="countParamsFromInputValue">Количество входных параметров</param>
-        /// <param name="parametersIncludeInValue">Список параметров которые содержит величина</param>
-        public void AddMeasureValue(string folderName, string measurableQuantityName, string measurableQuantityType, 
-            int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue)
+        public void AddMeasureValue(string idMeasurableQuantity, string folderName,
+                                    string measurableQuantityName, string measurableQuantityType, 
+                                    int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue)
         {
             TreeLevel treeLevel = new TreeLevel();
-            ObservableCollection<ItemOfParams> tempList = new ObservableCollection<ItemOfParams>(parametersIncludeInValue.ToList());
+            List<ItemOfParams> tempList = new List<ItemOfParams>(parametersIncludeInValue.ToList());
             treeLevel = FillItemOfChildrenRecursively(treeLevel, tempList);
 
             var items = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName).Subgroups.ItemOfSubgroup;
@@ -294,6 +236,7 @@ namespace NormManager.Services
                             Localizable = true,
                             Text = measurableQuantityName
                         },
+                        ID = idMeasurableQuantity,
                         ItemType = measurableQuantityType,
                         TreeLevel = treeLevel
                     }
@@ -303,7 +246,7 @@ namespace NormManager.Services
                     Ccols = countParamsFromInputValue,
                     Inherits = 1
                 }
-            }); ;
+            });
 
             for (int i = 0; i < parametersIncludeInValue.Count; i++)
             {
@@ -312,17 +255,14 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Редактирование измеряемой величины
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название величины</param>
-        /// <param name="measurableQuantityType">Тип величины</param>
-        /// <param name="countParamsFromInputValue">Количество входных параметров</param>
-        /// <param name="parametersIncludeInValue">Список параметров которые содержит величина</param>
-        public void EditMeasureValue(string folderName, string measurableQuantityName, string measurableQuantityType,
-            int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue)
+        public void EditMeasureValue(string idMeasurableQuantity, string folderName,
+                                     string measurableQuantityName, string measurableQuantityType,
+                                     int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue)
         {
+            TreeLevel treeLevel = new TreeLevel();
+            List<ItemOfParams> tempList = new List<ItemOfParams>(parametersIncludeInValue.ToList());
+            treeLevel = FillItemOfChildrenRecursively(treeLevel, tempList);
+
             var groups = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName).Subgroups.ItemOfSubgroup;
             var subgroup = groups.First(x => x.Quantities.ItemOfType.Name.Text == measurableQuantityName);
             var index = groups.IndexOf(subgroup);
@@ -337,7 +277,9 @@ namespace NormManager.Services
                             Localizable = true,
                             Text = measurableQuantityName
                         },
-                        ItemType = measurableQuantityType
+                        ID = idMeasurableQuantity,
+                        ItemType = measurableQuantityType,
+                        TreeLevel = treeLevel
                     }
                 },
                 Pattern = new Pattern()
@@ -355,12 +297,6 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Изменить название величины
-        /// </summary>
-        /// <param name="folderName">Название папки</param>
-        /// <param name="measurableQuantityName">Название величины</param>
-        /// <param name="newMeasurableQuantityName">Новое название величины</param>
         public void RenameMeasureValue(string folderName, string measurableQuantityName, string newMeasurableQuantityName)
         {
             var items = _structure.Groups.ItemOfGroup.First(x => x.Name.Text == folderName).Subgroups.ItemOfSubgroup;
@@ -370,17 +306,8 @@ namespace NormManager.Services
             _treeService.RenameMeasureValue(folderName, measurableQuantityName, newMeasurableQuantityName);
         }
 
-        /// <summary>
-        /// Добавление целочисленного параметра
-        /// </summary>
-        /// <param name="paramName">Название параметра</param>
-        /// <param name="lowerbound">Нижняя граница</param>
-        /// <param name="upperbound">Вверхняя граница</param>
-        /// <param name="unit">Единиица измерения</param>
-        public void AddRealParam(string paramName, string lowerbound, string upperbound, string unit)
+        public void AddRealParam(string paramId, string paramName, string lowerbound, string upperbound, string unit, string fname)
         {
-            string paramId = Guid.NewGuid().ToString();
-
             _structure.Params.ItemOfParams.Add(new ItemOfParams()
             {
                 Uid = paramId,
@@ -389,7 +316,7 @@ namespace NormManager.Services
                     Localizable = true,
                     Text = paramName
                 },
-                Fname = "A",
+                Fname = fname,
                 Lowerbound = lowerbound,
                 Upperbound = upperbound,
                 Type = new Models.Type()
@@ -404,15 +331,23 @@ namespace NormManager.Services
             });
         }
 
-        /// <summary>
-        /// Добавление параметра c перечислением
-        /// </summary>
-        /// <param name="paramName">Название параметра</param>
-        /// <param name="parameterOptions">Список вариантов параметра</param>
-        public void AddEnumParam(string paramName, ObservableCollection<string> parameterOptions)
+        public void EditRealParam(string paramId, string paramName, string lowerbound, string upperbound, string unit, string fname)
         {
-            string paramId = Guid.NewGuid().ToString();
+            var param = _structure.Params.ItemOfParams.First(x => x.Name.Text == _treeService.SelectedParamName);
+            param.Upperbound = upperbound;
+            param.Lowerbound = lowerbound;
+            param.Uid = paramId;
+            param.Fname = fname;
+            param.Type.Unitname.Text = unit;
+            param.Name = new Name()
+            {
+                Localizable = true,
+                Text = paramName
+            };
+        }
 
+        public void AddEnumParam(string paramId, string paramName, ObservableCollection<string> parameterOptions)
+        {
             _structure.Params.ItemOfParams.Add(new ItemOfParams()
             {
                 Uid = paramId,
@@ -427,10 +362,10 @@ namespace NormManager.Services
                 }
             });
 
+            var param = _structure.Params.ItemOfParams.First(x => x.Uid == paramId).Type.Enum;
             for (int i = 0; i < parameterOptions.Count; i++)
             {
                 var parametrOptionId = Guid.NewGuid().ToString();
-                var param = _structure.Params.ItemOfParams.First(x => x.Uid == paramId).Type.Enum;
                 param.Uid.Add(parametrOptionId);
                 param.String.Add(new Models.String()
                 {
@@ -440,13 +375,69 @@ namespace NormManager.Services
             }
         }
 
-        /// <summary>
-        /// Перемещение элементов внитри списка
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list">Список</param>
-        /// <param name="index1">Индекс первого</param>
-        /// <param name="index2">Индекс второго</param>
+        public void EditEnumParam(string paramId, string paramName, ObservableCollection<string> parameterOptions)
+        {
+            var param = _structure.Params.ItemOfParams.First(x => x.Name.Text == _treeService.SelectedParamName);
+            param.Uid = paramId;
+            param.Name = new Name()
+            {
+                Localizable = true,
+                Text = paramName
+            };
+
+            var paramList = _structure.Params.ItemOfParams.First(x => x.Name.Text == _treeService.SelectedParamName).Type.Enum;
+            paramList.Uid.Clear();
+            paramList.String.Clear();
+            for (int i = 0; i < parameterOptions.Count; i++)
+            {
+                var parametrOptionId = Guid.NewGuid().ToString();
+                paramList.Uid.Add(parametrOptionId);
+                paramList.String.Add(new Models.String()
+                {
+                    Localizable = true,
+                    Text = parameterOptions[i]
+                });
+            }
+        }
+
+        public ItemOfParams GetParam(string paramName) => _structure.Params.ItemOfParams.First(x => x.Name.Text == paramName);
+
+        public void ClearStructure() => _structure = new();
+
+        public List<ItemOfChildren> GetAllChildren(TreeLevel treeLevel, List<ItemOfChildren> childrens = null, List<ItemOfChildren> upperChildrens = null)
+        {
+            if (childrens == null)
+            {
+                childrens = new List<ItemOfChildren>();
+                upperChildrens = new List<ItemOfChildren>();
+            }
+
+            for (int i = 0; i < treeLevel.Children.ItemOfChildren.Count; i++)
+            {
+                if (i != 0 && upperChildrens != null)
+                {
+                    childrens.AddRange(upperChildrens);
+                }
+
+                childrens.Add(treeLevel.Children.ItemOfChildren[i]);
+
+                if (treeLevel.Children.ItemOfChildren[i].TreeLevel != null)
+                {
+                    // добавляем дублирующийся элемент
+                    upperChildrens.Add(treeLevel.Children.ItemOfChildren[i]);
+
+                    GetAllChildren(treeLevel.Children.ItemOfChildren[i].TreeLevel, childrens, upperChildrens);
+
+                    // Убираем дубль после прохождения до последнего уровня рекурсии
+                    upperChildrens.Reverse();
+                    upperChildrens.RemoveAt(0);
+                    upperChildrens.Reverse();
+                }
+            }
+
+            return childrens;
+        }
+
         private static void Swap<T>(ObservableCollection<T> list, int index1, int index2)
         {
             T temp = list[index1];
@@ -454,15 +445,7 @@ namespace NormManager.Services
             list[index2] = temp;
         }
 
-        /// <summary>
-        /// Очитка структуры
-        /// </summary>
-        public void ClearStructure()
-        {
-            _structure = new();
-        }
-
-        private TreeLevel FillItemOfChildrenRecursively(TreeLevel treeLevel, ObservableCollection<ItemOfParams> itemOfParamsList)
+        private TreeLevel FillItemOfChildrenRecursively(TreeLevel treeLevel, List<ItemOfParams> itemOfParamsList)
         {
             if (itemOfParamsList.Count == 0)
             {
@@ -474,34 +457,41 @@ namespace NormManager.Services
 
             if (currentItemOfParams.Type.Kind == "real")
             {
-                treeLevel.Children = new Children()
+                treeLevel.Children = new Children
                 {
-                    ItemOfChildren = new ItemOfChildren()
+                    ItemOfChildren = new List<ItemOfChildren>()
                     {
-                        Lower = $"{currentItemOfParams.Lowerbound}",
-                        Upper = $"{currentItemOfParams.Upperbound}",
-                        TreeLevel = new TreeLevel()
+                        new ItemOfChildren()
+                            {
+                            Lower = $"{currentItemOfParams.Lowerbound}",
+                            Upper = $"{currentItemOfParams.Upperbound}",
+                            TreeLevel = new TreeLevel()
+                        }
                     }
                 };
+
                 treeLevel.Cpid = $"{currentItemOfParams.Uid}";
             }
             else
             {
-                treeLevel.Children = new Children()
+                treeLevel.Children = new Children
                 {
-                    ItemOfChildren = new ItemOfChildren()
+                    ItemOfChildren = new List<ItemOfChildren>()
                     {
-                        EnumIndex = "-1",
-                        EnumId = "{8D994429-9DF2-4A72-AB46-E49FE3A7437C}",
-                        Upperincl = 0,
-                        Lowerincl = 0,
-                        TreeLevel = new TreeLevel()
+                        new ItemOfChildren()
+                        {
+                            EnumIndex = "-1",
+                            EnumId = "{8D994429-9DF2-4A72-AB46-E49FE3A7437C}",
+                            Upperincl = 0,
+                            Lowerincl = 0,
+                            TreeLevel = new TreeLevel()
+                        }
                     }
                 };
                 treeLevel.Cpid = $"{currentItemOfParams.Uid}";
             }
 
-            treeLevel.Children.ItemOfChildren.TreeLevel = FillItemOfChildrenRecursively(treeLevel.Children.ItemOfChildren.TreeLevel, itemOfParamsList);
+            treeLevel.Children.ItemOfChildren[0].TreeLevel = FillItemOfChildrenRecursively(treeLevel.Children.ItemOfChildren[0].TreeLevel, itemOfParamsList);
             return treeLevel;
         }
     }

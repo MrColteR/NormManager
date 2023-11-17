@@ -16,8 +16,6 @@ namespace NormManager.Views
         }
 
         private void WindowClosed(object? sender, EventArgs e)
-        {
-            (DataContext as TableColumnsViewModel)?.Close.Execute(null);
-        }
+            => (DataContext as TableColumnsViewModel)?.Close.Execute(null);
     }
 }

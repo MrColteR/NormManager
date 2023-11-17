@@ -1,4 +1,5 @@
 ﻿using NormManager.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace NormManager.Services.Interfaces
@@ -80,22 +81,26 @@ namespace NormManager.Services.Interfaces
         /// <summary>
         /// Добавление измеряемой величины
         /// </summary>
+        /// <param name="idMeasurableQuantity">ID величины</param>
         /// <param name="folderName">Название папки</param>
         /// <param name="measurableQuantityName">Название величины</param>
         /// <param name="measurableQuantityType">Тип величины</param>
         /// <param name="countParamsFromInputValue">Количество входных параметров</param>
         /// <param name="parametersIncludeInValue">Список параметров которые содержит величина</param>
-        public void AddMeasureValue(string folderName, string measurableQuantityName, string measurableQuantityType, int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue);
+        public void AddMeasureValue(string idMeasurableQuantity, string folderName, string measurableQuantityName, 
+            string measurableQuantityType, int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue);
 
         /// <summary>
         /// Редактирование измеряемой величины
         /// </summary>
+        /// <param name="idMeasurableQuantity">ID величины</param>
         /// <param name="folderName">Название папки</param>
         /// <param name="measurableQuantityName">Название величины</param>
         /// <param name="measurableQuantityType">Тип величины</param>
         /// <param name="countParamsFromInputValue">Количество входных параметров</param>
         /// <param name="parametersIncludeInValue">Список параметров которые содержит величина</param>
-        public void EditMeasureValue(string folderName, string measurableQuantityName, string measurableQuantityType, int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue);
+        public void EditMeasureValue(string idMeasurableQuantity, string folderName, string measurableQuantityName, string measurableQuantityType,
+            int countParamsFromInputValue, ObservableCollection<ItemOfParams> parametersIncludeInValue);
 
         /// <summary>
         /// Изменить название величины
@@ -108,18 +113,56 @@ namespace NormManager.Services.Interfaces
         /// <summary>
         /// Добавление целочисленного параметра
         /// </summary>
+        /// <param name="paramId">ID параметра</param>
         /// <param name="paramName">Название параметра</param>
         /// <param name="lowerbound">Нижняя граница</param>
         /// <param name="upperbound">Вверхняя граница</param>
         /// <param name="unit">Единиица измерения</param>
-        public void AddRealParam(string paramName, string lowerbound, string upperbound, string unit); 
+        /// <param name="fname">Обозначение в формулах</param>
+        public void AddRealParam(string paramId, string paramName, string lowerbound, string upperbound, string unit, string fname);
+
+        /// <summary>
+        /// редактирование целочисленного параметра
+        /// </summary>
+        /// <param name="paramId">ID параметра</param>
+        /// <param name="paramName">Название параметра</param>
+        /// <param name="lowerbound">Нижняя граница</param>
+        /// <param name="upperbound">Вверхняя граница</param>
+        /// <param name="unit">Единиица измерения</param>
+        /// <param name="fname">Обозначение в формулах</param>
+        public void EditRealParam(string paramId, string paramName, string lowerbound, string upperbound, string unit, string fname);
 
         /// <summary>
         /// Добавление параметра c перечислением
         /// </summary>
+        /// <param name="paramId">ID параметра</param>
         /// <param name="paramName">Название параметра</param>
         /// <param name="parameterOptions">Список вариантов параметра</param>
-        public void AddEnumParam(string paramName, ObservableCollection<string> parameterOptions); 
+        public void AddEnumParam(string paramId, string paramName, ObservableCollection<string> parameterOptions);
+
+        /// <summary>
+        /// Редактирование параметра c перечислением
+        /// </summary>
+        /// <param name="paramId">ID параметра</param>
+        /// <param name="paramName">Название параметра</param>
+        /// <param name="parameterOptions">Список вариантов параметра</param>
+        public void EditEnumParam(string paramId, string paramName, ObservableCollection<string> parameterOptions);
+
+        /// <summary>
+        /// Получить параметр
+        /// </summary>
+        /// <param name="paramName">Имя параметра</param>
+        /// <returns></returns>
+        public ItemOfParams GetParam(string paramName);
+
+        /// <summary>
+        /// Получить список объектов для разделения
+        /// </summary>
+        /// <param name="treeLevel">Структура</param>
+        /// <param name="childrens">Результат</param>
+        /// <param name="upperChildrens">Не используемый параметр для хранения дублей</param>
+        /// <returns></returns>
+        public List<ItemOfChildren> GetAllChildren(TreeLevel treeLevel, List<ItemOfChildren> childrens = null, List<ItemOfChildren> upperChildrens = null);
 
         /// <summary>
         /// Очитка структуры

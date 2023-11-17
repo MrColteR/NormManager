@@ -15,8 +15,6 @@ namespace NormManager.Views
         }
 
         private void WindowClosed(object? sender, System.EventArgs e)
-        {
-            (DataContext as EditorTreeViewModel)?.Close.Execute(null);
-        }
+            => (DataContext as EditorTreeViewModel)?.Close.Execute(null);
     }
 }

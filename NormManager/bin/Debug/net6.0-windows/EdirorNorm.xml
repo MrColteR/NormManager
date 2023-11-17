@@ -3,69 +3,72 @@
   <version>1.0</version>
   <groups>
     <item>
-      <name Localizable="true">папка</name>
+      <name Localizable="true">Папка</name>
       <subgroups>
         <item>
           <quantities>
             <item>
-              <name Localizable="true">иеуы</name>
+              <name Localizable="true">Величина</name>
               <type>formula</type>
               <treelevel>
                 <children>
                   <item>
-                  <enumid>{8D994429-9DF2-4A72-AB46-E49FE3A7437C}</enumid>
-                    <enumindex>-1</enumindex>
-                    <leaf>0</leaf>
+                    <upper>2737</upper>
+                    <leaf>1</leaf>
                     <visible>1</visible>
-                    <upperincl>0</upperincl>
-                    <lowerincl>0</lowerincl>
-                    <treelevel>
-                      <children>
-                        <item>
-                        <enumid>{8D994429-9DF2-4A72-AB46-E49FE3A7437C}</enumid>
-                          <enumindex>-1</enumindex>
-                          <leaf>0</leaf>
-                          <visible>1</visible>
-                          <upperincl>0</upperincl>
-                          <lowerincl>0</lowerincl>
-                          <treelevel>
-                            <children>
-                              <item>
-                                <upper>43800</upper>
-                                <leaf>0</leaf>
-                                <visible>1</visible>
-                                <upperincl>1</upperincl>
-                                <lower>0</lower>
-                                <lowerincl>1</lowerincl>
-                              </item>
-                            </children>
-                            <CPID>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</CPID>
-                            <empty>0</empty>
-                          </treelevel>
-                        </item>
-                      </children>
-                      <CPID>1be8da4b-dd01-4968-88c6-4139b3de95bf</CPID>
-                      <empty>0</empty>
-                    </treelevel>
+                    <upperincl>1</upperincl>
+                    <lower>0</lower>
+                    <lowerincl>1</lowerincl>
+                  </item>
+                  <item>
+                    <upper>43800</upper>
+                    <leaf>1</leaf>
+                    <visible>1</visible>
+                    <upperincl>1</upperincl>
+                    <lower>21901</lower>
+                    <lowerincl>1</lowerincl>
+                  </item>
+                  <item>
+                    <upper>21900</upper>
+                    <leaf>1</leaf>
+                    <visible>1</visible>
+                    <upperincl>1</upperincl>
+                    <lower>10951</lower>
+                    <lowerincl>1</lowerincl>
+                  </item>
+                  <item>
+                    <upper>10950</upper>
+                    <leaf>1</leaf>
+                    <visible>1</visible>
+                    <upperincl>1</upperincl>
+                    <lower>5476</lower>
+                    <lowerincl>1</lowerincl>
+                  </item>
+                  <item>
+                    <upper>5475</upper>
+                    <leaf>1</leaf>
+                    <visible>1</visible>
+                    <upperincl>1</upperincl>
+                    <lower>2738</lower>
+                    <lowerincl>1</lowerincl>
                   </item>
                 </children>
-                <CPID>SexId</CPID>
+                <CPID>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</CPID>
                 <empty>0</empty>
               </treelevel>
+              <id>{6a34250c-01fc-4069-8873-9443f93e9a58}</id>
             </item>
           </quantities>
           <pattern>
             <inherits>1</inherits>
             <items>
-              <string>SexId</string>
-              <string>1be8da4b-dd01-4968-88c6-4139b3de95bf</string>
               <string>{83EA104F-DA02-40B5-9E92-C3D1DC60112D}</string>
             </items>
             <ccols>0</ccols>
           </pattern>
         </item>
       </subgroups>
-      <id>6254ea59-70a2-46a9-9e79-4515252c82f6</id>
+      <id>aa73f905-b947-46fb-b148-04de4c33629f</id>
     </item>
   </groups>
   <params>
@@ -116,20 +119,6 @@
           <string Localizable="true">Ж</string>
           <uid>MaleId</uid>
           <uid>FemaleId</uid>
-        </enum>
-      </type>
-    </item>
-    <item>
-      <uid>1be8da4b-dd01-4968-88c6-4139b3de95bf</uid>
-      <name Localizable="true">тест</name>
-      <type>
-        <kind>enumeration</kind>
-        <unitname Localizable="false" />
-        <enum>
-          <string Localizable="true">1</string>
-          <string Localizable="true">2</string>
-          <uid>530edff2-500b-4f1e-9e16-c5c3e24a0468</uid>
-          <uid>1b7c9980-e426-4ab3-89c1-48913ffde773</uid>
         </enum>
       </type>
     </item>

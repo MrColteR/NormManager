@@ -15,8 +15,6 @@ namespace NormManager.Views
         }
 
         private void WindowClosed(object? sender, System.EventArgs e)
-        {
-            (DataContext as CreateNewXmlViewModel)?.Close.Execute(null);
-        }
+            => (DataContext as CreateNewXmlViewModel)?.Close.Execute(null);
     }
 }

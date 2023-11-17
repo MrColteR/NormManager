@@ -14,7 +14,7 @@ namespace NormManager.Models
         public string Upper { get; set; }
 
         [XmlElement(ElementName = "leaf")]
-        public int Leaf { get; set; } = 0;
+        public int Leaf { get; set; } = 1;
 
         [XmlElement(ElementName = "visible")]
         public int Visible { get; set; } = 1;

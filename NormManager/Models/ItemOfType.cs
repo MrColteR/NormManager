@@ -13,5 +13,8 @@ namespace NormManager.Models
 
         [XmlElement(ElementName = "treelevel")]
         public TreeLevel TreeLevel { get; set; } = new TreeLevel();
+
+        [XmlElement(ElementName = "id")]
+        public string ID { get; set; }
     }
 }

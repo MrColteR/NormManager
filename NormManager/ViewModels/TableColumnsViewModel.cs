@@ -58,12 +58,8 @@ namespace NormManager.ViewModels
         /// </summary>
         public int CountInputUsedParameters
         {
-            get => _countInputUsedParameters; 
-            set 
-            { 
-                _countInputUsedParameters = value;
-                OnPropertyChanged(nameof(CountInputUsedParameters));
-            }
+            get => _countInputUsedParameters;
+            set => SetProperty(ref _countInputUsedParameters, value);
         }
 
         /// <summary>
@@ -72,11 +68,7 @@ namespace NormManager.ViewModels
         public ObservableCollection<string> UsedParametersNames
         {
 			get => _usedParametersNames;
-            set 
-			{
-                _usedParametersNames = value;
-				OnPropertyChanged(nameof(UsedParametersNames));
-			}
+            set => SetProperty(ref _usedParametersNames, value);
 		}
 
         /// <summary>
@@ -85,11 +77,7 @@ namespace NormManager.ViewModels
         public ObservableCollection<string> AllParametersNames
         {
             get => _allParametersNames;
-            set
-            {
-                _allParametersNames = value;
-                OnPropertyChanged(nameof(AllParametersNames));
-            }
+            set => SetProperty(ref _allParametersNames, value);
         }
 
         /// <summary>
@@ -98,11 +86,7 @@ namespace NormManager.ViewModels
         public ObservableCollection<ItemOfParams> UsedParameters
         {
             get => _usedParameters;
-            set
-            {
-                _usedParameters = value;
-                OnPropertyChanged(nameof(UsedParameters));
-            }
+            set => SetProperty(ref _usedParameters, value);
         }
 
         /// <summary>
@@ -111,37 +95,25 @@ namespace NormManager.ViewModels
         public ObservableCollection<ItemOfParams> AllParameters
         {
             get => _allParameters;
-            set
-            {
-                _allParameters = value;
-                OnPropertyChanged(nameof(AllParameters));
-            }
+            set => SetProperty(ref _allParameters, value);
         }
 
         /// <summary>
         /// Выбранный параметр из списка используемых
         /// </summary>
-        public string SelectedUsedParameters
+        public string SelectedUsedParameter
         {
             get => _selectedUsedParameters;
-            set
-            {
-                _selectedUsedParameters = value;
-                OnPropertyChanged(nameof(SelectedUsedParameters));
-            }
+            set => SetProperty(ref _selectedUsedParameters, value);
         }
 
         /// <summary>
         /// Выбранный параметр из списка всех параметров
         /// </summary>
-        public string SelectedAllParameters
+        public string SelectedAllParameter
         {
             get => _selectedAllParameters;
-            set
-            {
-                _selectedAllParameters = value;
-                OnPropertyChanged(nameof(SelectedAllParameters));
-            }
+            set => SetProperty(ref _selectedAllParameters, value);
         }
 
         /// <summary>
@@ -149,30 +121,30 @@ namespace NormManager.ViewModels
         /// </summary>
         public ICommand SwapOneLeft => _swapOneLeft ??= new RelayCommand(obj =>
         {
-            var param = AllParameters.First(x => x.Name.Text == SelectedAllParameters);
+            var param = AllParameters.First(x => x.Name.Text == SelectedAllParameter);
             UsedParameters.Add(param);
             AllParameters.Remove(param);
 
-            UsedParametersNames.Add(SelectedAllParameters);
-            AllParametersNames.Remove(SelectedAllParameters);
+            UsedParametersNames.Add(SelectedAllParameter);
+            AllParametersNames.Remove(SelectedAllParameter);
 
-            SelectedAllParameters = string.Empty;
-        }, (obj) => SelectedAllParameters != string.Empty);
+            SelectedAllParameter = string.Empty;
+        }, (obj) => SelectedAllParameter != string.Empty);
 
         /// <summary>
         /// Переместить параметр в правый список
         /// </summary>
         public ICommand SwapOneRight => _swapOneRight ??= new RelayCommand(obj =>
         {
-            var param = UsedParameters.First(x => x.Name.Text == SelectedUsedParameters);
+            var param = UsedParameters.First(x => x.Name.Text == SelectedUsedParameter);
             AllParameters.Add(param);
             UsedParameters.Remove(param);
 
-            AllParametersNames.Add(SelectedUsedParameters);
-            UsedParametersNames.Remove(SelectedUsedParameters);
+            AllParametersNames.Add(SelectedUsedParameter);
+            UsedParametersNames.Remove(SelectedUsedParameter);
 
-            SelectedUsedParameters = string.Empty;
-        }, (obj) => SelectedUsedParameters != string.Empty);
+            SelectedUsedParameter = string.Empty;
+        }, (obj) => SelectedUsedParameter != string.Empty);
 
         /// <summary>
         /// Переместить все параметры в левый список
@@ -186,6 +158,7 @@ namespace NormManager.ViewModels
             }
 
             AllParametersNames.Clear();
+            AllParameters.Clear();
         }, (obj) => AllParametersNames.Count > 0);
 
         /// <summary>
@@ -200,6 +173,7 @@ namespace NormManager.ViewModels
             }
 
             UsedParametersNames.Clear();
+            UsedParameters.Clear();
         }, (obj) => UsedParametersNames.Count > 0);
 
         /// <summary>

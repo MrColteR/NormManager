@@ -1,11 +1,15 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace NormManager.Models
 {
     public class SubmainTreeElement : BaseModel
     {
         private ObservableCollection<ItemOfParams> _parametersIncludeInValue = new();
+
+        /// <summary>
+        /// ID
+        /// </summary>
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя родительской папки
@@ -33,11 +37,7 @@ namespace NormManager.Models
         public ObservableCollection<ItemOfParams> ParametersIncludeInValue 
         {
             get => _parametersIncludeInValue;
-            set
-            {
-                _parametersIncludeInValue = value;
-                OnPropertyChanged(nameof(ParametersIncludeInValue));
-            }
+            set => SetProperty(ref _parametersIncludeInValue, value);
         }
     }
 }

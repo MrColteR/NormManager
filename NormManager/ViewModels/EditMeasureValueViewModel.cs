@@ -19,6 +19,7 @@ namespace NormManager.ViewModels
         private ICommand _editTableColumns;
 
         private string _valueName = string.Empty;
+        private string _id /*= string.Concat("{", $"{Guid.NewGuid()}", "}")*/;
         private MeasuredQuantityType _selectTypeValue = MeasuredQuantityType.Formula;
         private List<MeasuredQuantityType> _typeOfValue = new()
         {
@@ -39,8 +40,9 @@ namespace NormManager.ViewModels
             _structureService = structureService;
             _treeService = treeService;
 
-            ValueName = _treeService.SelectedMeasurableQuantity;
-            SelectTypeValue = _treeService.SelectedMeasuredQuantityType;
+            ValueName = _treeService.SelectedNameMeasurableQuantity;
+            SelectTypeValue = _treeService.SelectedTypeMeasuredQuantity;
+            ID = _treeService.SelectedIdMeasurableQuantity;
         }
 
         /// <summary>
@@ -49,11 +51,16 @@ namespace NormManager.ViewModels
         public string ValueName
         {
             get => _valueName;
-            set
-            {
-                _valueName = value;
-                OnPropertyChanged(nameof(ValueName));
-            }
+            set => SetProperty(ref _valueName, value);
+        }
+
+        /// <summary>
+        /// ID измеряемой величины
+        /// </summary>
+        public string ID
+        {
+            get => _id;
+            set => SetProperty(ref _id, value);
         }
 
         /// <summary>
@@ -62,11 +69,7 @@ namespace NormManager.ViewModels
         public MeasuredQuantityType SelectTypeValue
         {
             get => _selectTypeValue;
-            set
-            {
-                _selectTypeValue = value;
-                OnPropertyChanged(nameof(SelectTypeValue));
-            }
+            set => SetProperty(ref _selectTypeValue, value);
         }
 
         /// <summary>
@@ -80,22 +83,20 @@ namespace NormManager.ViewModels
         public ICommand CreateMeasureValue => _createMeasureValue ??= new RelayCommand(obj =>
         {
             var selectedFolder = _treeService.SelectedFolder;
-            var selectedMeasurableQuantity = _treeService.SelectedMeasurableQuantity;
+            var selectedMeasurableQuantity = _treeService.SelectedNameMeasurableQuantity;
             var measurableQuantity = _treeService.MainTreeElementsList.First(x => x.FolderName == selectedFolder).SubmainElementsList.First(x => x.MeasurableQuantityName == selectedMeasurableQuantity);
             measurableQuantity.ValueType = SelectTypeValue;
 
-            if (_treeService.SelectedMeasurableQuantity != ValueName)
+            if (_treeService.SelectedNameMeasurableQuantity != ValueName)
             {
-                _structureService.RenameMeasureValue(_treeService.SelectedFolder, _treeService.SelectedMeasurableQuantity, ValueName);
+                _structureService.RenameMeasureValue(_treeService.SelectedFolder, _treeService.SelectedNameMeasurableQuantity, ValueName);
             }
 
-            _treeService.SelectedMeasurableQuantity = ValueName;
-            _treeService.SelectedMeasuredQuantityType = SelectTypeValue;
-
+            _treeService.SelectedNameMeasurableQuantity = ValueName;
+            _treeService.SelectedTypeMeasuredQuantity = SelectTypeValue;
             _treeService.EditMeasurableQuantity();
 
-
-            _structureService.EditMeasureValue(_treeService.SelectedFolder, ValueName, EnumHelper.GetEnumDescription(SelectTypeValue),
+            _structureService.EditMeasureValue(ID, _treeService.SelectedFolder, ValueName, EnumHelper.GetEnumDescription(SelectTypeValue),
                 measurableQuantity.CountInputParameters, measurableQuantity.ParametersIncludeInValue);
 
 
@@ -107,13 +108,13 @@ namespace NormManager.ViewModels
         /// </summary>
         public ICommand EditTableColumns => _editTableColumns ??= new RelayCommand(obj =>
         {
-            if (_treeService.SelectedMeasurableQuantity != ValueName)
+            if (_treeService.SelectedNameMeasurableQuantity != ValueName)
             {
-                _structureService.RenameMeasureValue(_treeService.SelectedFolder, _treeService.SelectedMeasurableQuantity, ValueName);
+                _structureService.RenameMeasureValue(_treeService.SelectedFolder, _treeService.SelectedNameMeasurableQuantity, ValueName);
             }
 
-            _treeService.SelectedMeasurableQuantity = ValueName;
-            _treeService.SelectedMeasuredQuantityType = SelectTypeValue;
+            _treeService.SelectedNameMeasurableQuantity = ValueName;
+            _treeService.SelectedTypeMeasuredQuantity = SelectTypeValue;
             _windowService.Show<EditTableColumnsViewModel>();
         }, (obj) => ValueName != string.Empty);
 

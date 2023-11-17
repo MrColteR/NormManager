@@ -27,11 +27,7 @@ namespace NormManager.ViewModels
         public string FileName
         {
             get => _fileName;
-            set
-            {
-                _fileName = value;
-                OnPropertyChanged(nameof(FileName));
-            }
+            set => SetProperty(ref _fileName, value);
         }
 
         /// <summary>
@@ -40,11 +36,7 @@ namespace NormManager.ViewModels
         public string Path
         {
             get => _path;
-            set
-            {
-                _path = value;
-                OnPropertyChanged(nameof(Path));
-            }
+            set => SetProperty(ref _path, value);
         }
 
         /// <summary>
