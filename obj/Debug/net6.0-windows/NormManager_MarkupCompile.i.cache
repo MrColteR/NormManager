@@ -1,0 +1,20 @@
+﻿NormManager
+1.0.0.0
+
+winexe
+C#
+.cs
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\obj\Debug\net6.0-windows\
+NormManager
+none
+false
+TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+C:\Users\MrCol\OneDrive\Рабочий стол\graduate work\NormManager\App.xaml
+91691771939
+
+58-1586073931
+196-1587163212
+Views\AddParamsWindow.xaml;Views\CreateMeasureValueWindow.xaml;Views\CreateNewFolderWindow.xaml;Views\CreateNewXmlWindow.xaml;Views\EditMeasureValueWindow.xaml;Views\EditorTreeWindow.xaml;Views\EditTableColumnsWindow.xaml;Views\MainWindow.xaml;Views\TableColumnsWindow.xaml;
+
+True
+
