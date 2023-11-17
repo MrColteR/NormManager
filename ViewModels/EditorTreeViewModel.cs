@@ -66,7 +66,11 @@ namespace NormManager.ViewModels
         public SubmainTreeElement SelectedSubmainItem 
         {
             get => _selectedSubmainItem;
-            set => SetProperty(ref _selectedSubmainItem, value);
+            set
+            {
+                SetProperty(ref _selectedSubmainItem, value);
+                UpdatePropertiesSelectedItem();
+            }
         }
 
         /// <summary>
