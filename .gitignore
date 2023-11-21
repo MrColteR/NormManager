@@ -2,5 +2,5 @@
 .vs/
 .idea/
 
-NormManager/bin/
-NormManager/obj/
+bin/
+obj/
